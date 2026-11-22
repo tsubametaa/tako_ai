@@ -1,0 +1,16 @@
+export * from './domain/navigation';
+export * from './infrastructure/adminAnalyticsApi';
+export * from './infrastructure/adminRagApi';
+export * from './infrastructure/adminChatsApi';
+export * from './infrastructure/adminStudentsApi';
+export { AdminAnalyticsController } from './presentation/state/adminAnalytics.svelte';
+export { AdminRagController } from './presentation/state/adminRag.svelte';
+export { AdminChatsController } from './presentation/state/adminChats.svelte';
+export { AdminStudentsController } from './presentation/state/adminStudents.svelte';
+export { default as AdminShell } from './presentation/components/AdminShell.svelte';
+export { default as AdminAppLayout } from './presentation/pages/AdminAppLayout.svelte';
+export { default as AdminOverviewPage } from './presentation/pages/AdminOverviewPage.svelte';
+export { default as AdminStudentsPage } from './presentation/pages/AdminStudentsPage.svelte';
+export { default as AdminChatsPage } from './presentation/pages/AdminChatsPage.svelte';
+export { default as AdminMateriPage } from './presentation/pages/AdminMateriPage.svelte';
+export { default as AdminAuditPage } from './presentation/pages/AdminAuditPage.svelte';

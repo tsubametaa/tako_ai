@@ -1,0 +1,21 @@
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-soft: var(--surface-soft);
+  --color-sage: var(--sage);
+  --color-sage-deep: var(--sage-deep);
+  --color-primary: var(--primary);
+  --color-on-primary: var(--on-primary);
+  --color-mustard: var(--mustard);
+  --color-on-mustard: var(--on-mustard);
+  --color-mustard-soft: var(--mustard-soft);
+  --color-ink: var(--text);
+  --color-muted: var(--muted);
+  --color-line: var(--border);
+  --color-line-subtle: var(--border-subtle);
+  --color-accent: var(--accent);
+  --color-on-accent: var(--on-accent);
+  --color-danger: var(--danger);
+  --color-neo-border: var(--neo-border-color);
+  --color-neo-shadow: var(--neo-shadow-color);
+}

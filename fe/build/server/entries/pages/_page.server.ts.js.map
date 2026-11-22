@@ -1,0 +1,1 @@
+{"version":3,"file":"_page.server.ts.js","names":[],"sources":["../../../../src/routes/+page.server.ts"],"sourcesContent":["import { redirect } from '@sveltejs/kit';\nimport type { PageServerLoad } from './$types';\n\nexport const load: PageServerLoad = async () => {\n  throw redirect(307, '/home');\n};\n"],"mappings":";;AAGA,IAAa,OAAuB,YAAY;CAC9C,MAAM,SAAS,KAAK,OAAO;AAC7B"}

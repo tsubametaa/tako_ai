@@ -1,0 +1,66 @@
+/* Purposeful, GPU-composited micro-interactions (respects prefers-reduced-motion) */
+
+.motion-card {
+  transition:
+    transform 180ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 180ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 180ms ease;
+}
+
+.motion-card:hover {
+  transform: translate3d(-1.5px, -2px, 0);
+}
+
+@keyframes motion-enter-up {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 12px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.motion-enter {
+  animation: motion-enter-up 340ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Minimalist AI thinking text shimmer (inspired by shadcn-svelte shimmer utility) */
+@keyframes tako-text-shimmer {
+  0% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: -100% 50%;
+  }
+}
+
+.tako-shimmer {
+  color: transparent;
+  background-image: linear-gradient(
+    110deg,
+    var(--muted) 35%,
+    var(--text) 50%,
+    var(--muted) 65%
+  );
+  background-size: 250% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  animation: tako-text-shimmer 1.9s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .motion-card,
+  .motion-enter,
+  .tako-shimmer {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+  }
+
+  .tako-shimmer {
+    color: var(--muted);
+    background-image: none;
+  }
+}

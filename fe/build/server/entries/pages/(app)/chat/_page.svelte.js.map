@@ -1,0 +1,1 @@
+{"version":3,"file":"_page.svelte.js","names":[],"sources":["../../../../../../src/routes/(app)/chat/+page.svelte"],"sourcesContent":["<script lang=\"ts\">\n  import { NewChatPage } from '$lib/features/chat';\n</script>\n\n<NewChatPage />\n\n"],"mappings":";;;AAAA,SAAA,MAAA,YAAA;;AAEQ"}

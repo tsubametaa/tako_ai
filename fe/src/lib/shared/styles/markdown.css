@@ -1,0 +1,144 @@
+/* Custom Tailwind CSS v4 Typography theme for TAKO AI chat responses
+ * Follows @tailwindcss/typography --tw-prose-* variable contract and
+ * shadcn/ui typeset spacing rhythm for comfortable student reading. */
+@utility prose-tako {
+  --tw-prose-body: var(--text);
+  --tw-prose-headings: var(--text);
+  --tw-prose-lead: var(--muted);
+  --tw-prose-links: var(--primary);
+  --tw-prose-bold: var(--text);
+  --tw-prose-counters: var(--primary);
+  --tw-prose-bullets: var(--primary);
+  --tw-prose-hr: var(--border-subtle);
+  --tw-prose-quotes: var(--text);
+  --tw-prose-quote-borders: var(--mustard);
+  --tw-prose-captions: var(--muted);
+  --tw-prose-kbd: var(--text);
+  --tw-prose-kbd-shadows: 26 32 28;
+  --tw-prose-code: var(--text);
+  --tw-prose-pre-code: #eff4f1;
+  --tw-prose-pre-bg: #141a17;
+  --tw-prose-th-borders: var(--border-subtle);
+  --tw-prose-td-borders: var(--border-subtle);
+}
+
+.tako-markdown {
+  color: var(--text);
+  font-size: 0.9rem;
+  line-height: 1.72;
+  overflow-wrap: anywhere;
+}
+
+.tako-markdown--compact {
+  font-size: 0.875rem;
+  line-height: 1.55;
+}
+
+.tako-markdown > :first-child {
+  margin-top: 0;
+}
+
+.tako-markdown > :last-child {
+  margin-bottom: 0;
+}
+
+.tako-markdown p {
+  margin-top: 0.7em;
+  margin-bottom: 0.7em;
+}
+
+.tako-markdown em {
+  color: var(--text);
+  font-style: italic;
+}
+
+.tako-markdown strong,
+.tako-markdown b {
+  color: var(--text);
+  font-weight: 700;
+}
+
+/* Remove @tailwindcss/typography generated literal backticks around inline code */
+.tako-markdown :not(pre) > code::before,
+.tako-markdown :not(pre) > code::after {
+  content: none;
+}
+
+.tako-markdown :not(pre) > code {
+  display: inline-block;
+  padding: 0.08rem 0.42rem;
+  margin: 0 0.05rem;
+  border-radius: 0.42rem;
+  border: 1px solid var(--border-subtle);
+  background: var(--surface);
+  color: var(--text);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.84em;
+  font-weight: 600;
+  line-height: 1.45;
+  vertical-align: baseline;
+}
+
+.tako-markdown pre {
+  margin: 0.9em 0;
+  padding: 0.9rem 1rem;
+  border-radius: 0.75rem;
+  border: 2px solid color-mix(in srgb, var(--border) 45%, transparent);
+  background: #141a17;
+  color: #eff4f1;
+  overflow-x: auto;
+  line-height: 1.6;
+}
+
+.tako-markdown pre code {
+  border: none;
+  background: transparent;
+  padding: 0;
+  color: inherit;
+  font-size: 0.82rem;
+  font-weight: 500;
+}
+
+.tako-markdown blockquote {
+  margin: 0.85em 0;
+  padding: 0.5rem 0.9rem;
+  border-inline-start: 3px solid var(--mustard);
+  border-radius: 0 0.5rem 0.5rem 0;
+  background: var(--surface);
+  font-style: normal;
+}
+
+.tako-markdown blockquote p:first-of-type::before,
+.tako-markdown blockquote p:last-of-type::after {
+  content: none;
+}
+
+.tako-markdown ul,
+.tako-markdown ol {
+  margin: 0.65em 0;
+  padding-inline-start: 1.35rem;
+}
+
+.tako-markdown li {
+  margin-top: 0.3em;
+  margin-bottom: 0.3em;
+}
+
+.tako-markdown table {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+  border-collapse: collapse;
+  font-size: 0.84rem;
+}
+
+.tako-markdown th,
+.tako-markdown td {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--border-subtle);
+}
+
+.tako-markdown th {
+  background: var(--surface);
+  font-weight: 700;
+}

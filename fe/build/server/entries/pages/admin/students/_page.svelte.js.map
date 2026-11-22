@@ -1,0 +1,1 @@
+{"version":3,"file":"_page.svelte.js","names":[],"sources":["../../../../../../src/routes/admin/students/+page.svelte"],"sourcesContent":["<script lang=\"ts\">\n  import { AdminStudentsPage } from '$lib/features/admin';\n</script>\n\n<AdminStudentsPage />\n"],"mappings":";;;AAAA,SAAA,MAAA,YAAA;;AAEQ"}

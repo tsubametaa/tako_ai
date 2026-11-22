@@ -1,0 +1,9 @@
+@import "tailwindcss";
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+@import "./lib/shared/styles/tokens.css";
+@import "./lib/shared/styles/theme.css";
+@import "./lib/shared/styles/base.css";
+@import "./lib/shared/styles/neobrutalism.css";
+@import "./lib/shared/styles/motion.css";
+@import "./lib/shared/styles/markdown.css";
+@plugin "@tailwindcss/typography";

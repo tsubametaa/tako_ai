@@ -1,0 +1,1 @@
+{"version":3,"file":"hooks.universal.js","names":[],"sources":["../../../src/hooks.ts"],"sourcesContent":["import type { Reroute } from '@sveltejs/kit/hooks';\nimport { resolveSubdomainPathname } from '$lib/shared/config/subdomains';\n\nexport const reroute: Reroute = ({ url }) => resolveSubdomainPathname(url);\n"],"mappings":";;AAGA,IAAa,WAAoB,EAAE,UAAU,yBAAyB,GAAG"}

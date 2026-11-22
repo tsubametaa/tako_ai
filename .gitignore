@@ -1,0 +1,19 @@
+# Documentation & internal specs
+docs/
+spec/
+
+# Environment variables (keep *.env.example tracked)
+.env
+.env.*
+!.env.example
+be/.env
+fe/.env
+
+# Frontend build & SvelteKit generated files
+fe/.svelte-kit/
+fe/build/
+fe/node_modules/
+
+# Backend binaries
+be/*.exe
+be/kka-api
