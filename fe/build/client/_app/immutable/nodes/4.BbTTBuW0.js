@@ -1,1 +1,0 @@
-import{j as e,k as t}from"../chunks/DMkmXFON.js";import"../chunks/CNvR2RWd.js";var n=e(`<div class="flex h-screen items-center justify-center bg-background text-sm text-muted">Memuat TAKO AI…</div>`);function r(e){var r=n();t(e,r)}export{r as component};
