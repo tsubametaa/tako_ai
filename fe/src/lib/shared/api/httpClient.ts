@@ -38,17 +38,56 @@ export class ApiError extends Error {
   }
 }
 
+function resolveSharedCookieDomain(hostname: string): string | null {
+  const host = hostname.trim().toLowerCase();
+  if (host === 'utaaa.io' || host.endsWith('.utaaa.io')) return '.utaaa.io';
+  if (host === 'tako.ai.id' || host.endsWith('.tako.ai.id')) return '.tako.ai.id';
+  return null;
+}
+
+function readTokenCookie(): string | null {
+  if (typeof document === 'undefined') return null;
+  const prefix = `${TOKEN_STORAGE_KEY}=`;
+  for (const part of document.cookie.split(';')) {
+    const trimmed = part.trim();
+    if (trimmed.startsWith(prefix)) {
+      const value = trimmed.slice(prefix.length);
+      return value ? decodeURIComponent(value) : null;
+    }
+  }
+  return null;
+}
+
+function writeTokenCookie(token: string | null): void {
+  if (typeof document === 'undefined' || typeof window === 'undefined') return;
+  const domain = resolveSharedCookieDomain(window.location.hostname);
+  if (!domain) return;
+  const secure = window.location.protocol === 'https:' ? '; Secure' : '';
+  if (token) {
+    document.cookie = `${TOKEN_STORAGE_KEY}=${encodeURIComponent(token)}; Domain=${domain}; Path=/; SameSite=Lax; Max-Age=86400${secure}`;
+  } else {
+    document.cookie = `${TOKEN_STORAGE_KEY}=; Domain=${domain}; Path=/; SameSite=Lax; Max-Age=0${secure}`;
+  }
+}
+
 export function getStoredToken(): string | null {
   if (typeof window === 'undefined') return null;
   try {
-    return localStorage.getItem(TOKEN_STORAGE_KEY);
+    const localToken = localStorage.getItem(TOKEN_STORAGE_KEY);
+    if (localToken) return localToken;
+    const cookieToken = readTokenCookie();
+    if (cookieToken) {
+      localStorage.setItem(TOKEN_STORAGE_KEY, cookieToken);
+    }
+    return cookieToken;
   } catch {
-    return null;
+    return readTokenCookie();
   }
 }
 
 export function setStoredToken(token: string | null): void {
   if (typeof window === 'undefined') return;
+  writeTokenCookie(token);
   try {
     if (token) {
       localStorage.setItem(TOKEN_STORAGE_KEY, token);
