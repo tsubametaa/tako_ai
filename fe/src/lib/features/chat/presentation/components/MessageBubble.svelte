@@ -2,7 +2,12 @@
   import { Check, Clock, Copy } from '@lucide/svelte';
   import { cubicOut } from 'svelte/easing';
   import { fly } from 'svelte/transition';
-  import { SourceChip, SourcePanel } from '$lib/features/sources';
+  import {
+    ContextTopicBadges,
+    extractContextTopics,
+    SourceChip,
+    SourcePanel,
+  } from '$lib/features/sources';
   import type { GenerationStatus } from '../../domain/generation';
   import type { Message } from '../../domain/message';
   import { splitGuidingQuestion } from '../../domain/responseFormat';
@@ -27,6 +32,7 @@
   );
 
   const primarySourceTitle = $derived(message.sources?.[0]?.title);
+  const contextTopics = $derived(extractContextTopics(message.sources));
 
   async function handleCopy() {
     try {
@@ -134,13 +140,14 @@
         {/if}
 
         {#if message.sources && message.sources.length > 0}
-          <div class="flex flex-col pt-0.5">
+          <div class="flex flex-col gap-2 pt-0.5">
             <SourceChip
               count={message.sources.length}
               label={primarySourceTitle}
               open={showSources}
               onclick={() => (showSources = !showSources)}
             />
+            <ContextTopicBadges topics={contextTopics} />
             <SourcePanel
               sources={message.sources}
               open={showSources}

@@ -2,7 +2,7 @@
   import { ExternalLink, X } from '@lucide/svelte';
   import { cubicOut } from 'svelte/easing';
   import { slide } from 'svelte/transition';
-  import { isSafeUrl, type Source } from '../../domain/source';
+  import { isSafeUrl, resolveSourceTopic, type Source } from '../../domain/source';
 
   interface Props {
     sources: Source[];
@@ -40,6 +40,7 @@
     {:else}
       <div class="flex flex-col gap-3">
         {#each sources as src, idx (src.id || idx)}
+          {@const topicLabel = resolveSourceTopic(src)}
           <div class="flex flex-col gap-1.5 rounded-xl border-2 border-line bg-surface p-3 shadow-[2px_2px_0px_var(--neo-shadow-color)]">
             <div class="flex items-start justify-between gap-2">
               <span class="text-xs font-bold text-ink">
@@ -58,14 +59,16 @@
               {/if}
             </div>
 
-            <div class="flex flex-wrap gap-2 text-[11px] text-muted">
-              {#if src.section}
-                <span>Topik: {src.section}</span>
-              {/if}
-              {#if src.page}
-                <span>• Halaman: {src.page}</span>
-              {/if}
-            </div>
+            {#if topicLabel || src.page}
+              <div class="flex flex-wrap gap-2 text-[11px] text-muted">
+                {#if topicLabel}
+                  <span>Topik: {topicLabel}</span>
+                {/if}
+                {#if src.page}
+                  <span>{topicLabel ? '• ' : ''}Halaman: {src.page}</span>
+                {/if}
+              </div>
+            {/if}
 
             {#if src.snippet}
               <blockquote class="mt-1 border-l-2 border-sage/60 pl-2 text-xs italic text-ink/80">

@@ -33,10 +33,12 @@ interface MessagesPageDto {
 }
 
 function mapSource(dto: SourceDto): Source {
+  const cleanTopic = dto.topic?.replace(/\s+/g, ' ').trim();
   return {
     id: dto.id,
     title: dto.title,
-    section: dto.topic || dto.label,
+    topic: cleanTopic || undefined,
+    section: cleanTopic || dto.label,
     page:
       Array.isArray(dto.pages) && dto.pages.length > 0
         ? dto.pages[0]
