@@ -2,16 +2,14 @@ export type SubdomainSite = 'home' | 'chat' | 'admin' | 'auth';
 
 export type SiteUrlOrigin = Pick<URL, 'hostname' | 'protocol' | 'port'>;
 export type SiteHostRef = Pick<URL, 'hostname'>;
-export type SiteRedirectUrl = Pick<
-  URL,
-  'hostname' | 'protocol' | 'port' | 'pathname'
-> & {
+export type SiteRedirectUrl = Pick<URL, 'hostname' | 'protocol' | 'port' | 'pathname'> & {
   readonly searchParams: Pick<URLSearchParams, 'get'>;
 };
 
 interface DomainBase {
   rootDomain: string;
   homeHost: string;
+  unifiedHomeAuthAdmin?: boolean;
 }
 
 const STATIC_EXT_PATTERN =
@@ -22,8 +20,6 @@ const HOST_TO_SITE: Record<string, SubdomainSite> = {
   'utaaa.io': 'home',
   'www.utaaa.io': 'home',
   'chat.utaaa.io': 'chat',
-  'admin.utaaa.io': 'admin',
-  'auth.utaaa.io': 'auth',
   'tako.ai.id': 'home',
   'www.tako.ai.id': 'home',
   'chat.tako.ai.id': 'chat',
@@ -50,7 +46,7 @@ function normalizeHostname(raw: string): string {
 function resolveDomainBase(hostname: string): DomainBase | null {
   const host = normalizeHostname(hostname);
   if (host === 'utaaa.io' || host.endsWith('.utaaa.io')) {
-    return { rootDomain: 'utaaa.io', homeHost: 'ai.utaaa.io' };
+    return { rootDomain: 'utaaa.io', homeHost: 'ai.utaaa.io', unifiedHomeAuthAdmin: true };
   }
   if (host === 'tako.ai.id' || host.endsWith('.tako.ai.id')) {
     return { rootDomain: 'tako.ai.id', homeHost: 'tako.ai.id' };
@@ -58,23 +54,14 @@ function resolveDomainBase(hostname: string): DomainBase | null {
   if (host === 'tako.localhost' || host.endsWith('.tako.localhost')) {
     return { rootDomain: 'tako.localhost', homeHost: 'tako.localhost' };
   }
-  if (
-    host === 'ai.localhost' ||
-    host === 'chat.localhost' ||
-    host === 'admin.localhost' ||
-    host === 'auth.localhost'
-  ) {
+  if (['ai.localhost', 'chat.localhost', 'admin.localhost', 'auth.localhost'].includes(host)) {
     return { rootDomain: 'localhost', homeHost: 'ai.localhost' };
   }
   return null;
 }
 
 function isPassthroughPath(pathname: string): boolean {
-  return (
-    pathname.startsWith('/_app/') ||
-    pathname.startsWith('/api/') ||
-    STATIC_EXT_PATTERN.test(pathname)
-  );
+  return pathname.startsWith('/_app/') || pathname.startsWith('/api/') || STATIC_EXT_PATTERN.test(pathname);
 }
 
 function hasPathPrefix(pathname: string, prefix: string): boolean {
@@ -83,40 +70,43 @@ function hasPathPrefix(pathname: string, prefix: string): boolean {
 
 function stripPathPrefix(pathname: string, prefix: string): string {
   if (pathname === prefix) return '/';
-  if (pathname.startsWith(`${prefix}/`)) {
-    const rest = pathname.slice(prefix.length);
-    return rest || '/';
-  }
+  if (pathname.startsWith(`${prefix}/`)) return pathname.slice(prefix.length) || '/';
   return pathname || '/';
 }
 
 function ensureLeadingSlash(path: string): string {
-  if (!path) return '/';
-  return path.startsWith('/') ? path : `/${path}`;
+  return !path ? '/' : path.startsWith('/') ? path : `/${path}`;
 }
 
-function defaultPrefixForSite(site: SubdomainSite): string {
+function defaultPrefixForSite(site: SubdomainSite, base?: DomainBase | null): string {
   if (site === 'home') return '/home';
   if (site === 'chat') return '/chat';
   if (site === 'admin') return '/admin';
-  return '/login';
+  return base?.unifiedHomeAuthAdmin ? '/auth' : '/login';
 }
 
-function isTrustedCrossSiteUrl(
-  candidate: string,
-  currentUrl: SiteUrlOrigin,
-  base: DomainBase,
-): string | null {
+function buildPrefixedPath(prefix: string, normalizedPath: string): string {
+  if (normalizedPath === '/') return prefix;
+  if (normalizedPath.startsWith('/?')) return `${prefix}${normalizedPath.slice(1)}`;
+  return hasPathPrefix(normalizedPath, prefix) ? normalizedPath : `${prefix}${normalizedPath}`;
+}
+
+function isAuthPathOnUnifiedHome(pathname: string, base: DomainBase): boolean {
+  return Boolean(base.unifiedHomeAuthAdmin && (hasPathPrefix(pathname, '/auth') || pathname === '/login'));
+}
+
+function isAdminPathOnUnifiedHome(pathname: string, base: DomainBase): boolean {
+  return Boolean(base.unifiedHomeAuthAdmin && hasPathPrefix(pathname, '/admin'));
+}
+
+function isTrustedCrossSiteUrl(candidate: string, currentUrl: SiteUrlOrigin, base: DomainBase): string | null {
   try {
     const parsed = new URL(candidate);
-    if (parsed.protocol !== 'http:' && parsed.protocol !== 'https:') {
-      return null;
-    }
+    if (parsed.protocol !== 'http:' && parsed.protocol !== 'https:') return null;
     const targetSite = resolveSiteFromHostname(parsed.hostname);
-    const targetBase = resolveDomainBase(parsed.hostname);
-    const sameRoot = targetBase?.rootDomain === base.rootDomain;
+    const sameRoot = resolveDomainBase(parsed.hostname)?.rootDomain === base.rootDomain;
     const samePort = (parsed.port || '') === (currentUrl.port || '');
-    if (!sameRoot || !samePort || !targetSite || targetSite === 'auth') {
+    if (!sameRoot || !samePort || !targetSite || targetSite === 'auth' || isAuthPathOnUnifiedHome(parsed.pathname, base)) {
       return null;
     }
     return parsed.toString();
@@ -136,6 +126,7 @@ export function resolveSubdomainPathname(url: URL): string | undefined {
   if (isPassthroughPath(pathname)) return undefined;
 
   const site = resolveSiteFromHostname(url.hostname);
+  const base = resolveDomainBase(url.hostname);
 
   if (site === 'auth') {
     if (pathname === '/') return '/login';
@@ -160,6 +151,11 @@ export function resolveSubdomainPathname(url: URL): string | undefined {
     return `/admin${pathname}`;
   }
 
+  // Untuk domain terpadu (ai.utaaa.io), /auth memetakan ke rute internal /login.
+  if (site === 'home' && base?.unifiedHomeAuthAdmin && pathname === '/auth') {
+    return '/login';
+  }
+
   // Untuk site 'home' dan akses lokal tanpa subdomain (localhost / IP), root '/' menuju '/home'.
   if (pathname === '/') return '/home';
   return undefined;
@@ -175,16 +171,19 @@ export function buildSiteUrl(
 
   if (!base) {
     const prefix = defaultPrefixForSite(targetSite);
-    if (normalizedPath === '/') return prefix;
-    if (normalizedPath.startsWith('/?')) return `${prefix}${normalizedPath.slice(1)}`;
-    if (hasPathPrefix(normalizedPath, prefix)) return normalizedPath;
     if (targetSite === 'home' && normalizedPath === '/login') return '/login';
-    return `${prefix}${normalizedPath}`;
+    return buildPrefixedPath(prefix, normalizedPath);
+  }
+
+  const port = currentUrl.port ? `:${currentUrl.port}` : '';
+  if (base.unifiedHomeAuthAdmin && (targetSite === 'auth' || targetSite === 'admin')) {
+    const prefix = defaultPrefixForSite(targetSite, base);
+    const unifiedPath = buildPrefixedPath(prefix, normalizedPath);
+    return `${currentUrl.protocol}//${base.homeHost}${port}${unifiedPath}`;
   }
 
   const targetHost =
     targetSite === 'home' ? base.homeHost : `${targetSite}.${base.rootDomain}`;
-  const port = currentUrl.port ? `:${currentUrl.port}` : '';
   return `${currentUrl.protocol}//${targetHost}${port}${normalizedPath}`;
 }
 
@@ -195,12 +194,13 @@ export function buildSitePath(
 ): string {
   const normalizedSubPath = ensureLeadingSlash(subPath);
   const activeSite = resolveSiteFromHostname(currentUrl.hostname);
+  const base = resolveDomainBase(currentUrl.hostname);
 
-  if (activeSite === site) {
+  if (activeSite === site && !(base?.unifiedHomeAuthAdmin && (site === 'auth' || site === 'admin'))) {
     return normalizedSubPath;
   }
 
-  const prefix = defaultPrefixForSite(site);
+  const prefix = defaultPrefixForSite(site, base);
   return normalizedSubPath === '/' ? prefix : `${prefix}${normalizedSubPath}`;
 }
 
@@ -228,11 +228,17 @@ export function buildAuthLoginUrl(
     return '/login';
   }
 
-  if (returnTarget && isTrustedCrossSiteUrl(returnTarget, currentUrl, base)) {
+  const port = currentUrl.port ? `:${currentUrl.port}` : '';
+  const absoluteCandidate =
+    returnTarget && returnTarget.startsWith('/') && !returnTarget.startsWith('//')
+      ? `${currentUrl.protocol}//${currentUrl.hostname}${port}${returnTarget}`
+      : returnTarget;
+
+  if (absoluteCandidate && isTrustedCrossSiteUrl(absoluteCandidate, currentUrl, base)) {
     return buildSiteUrl(
       'auth',
       currentUrl,
-      `/?next=${encodeURIComponent(returnTarget)}`,
+      `/?next=${encodeURIComponent(absoluteCandidate)}`,
     );
   }
   return buildSiteUrl('auth', currentUrl, '/');
@@ -262,9 +268,9 @@ export function resolveSafePostLoginTarget(
             ? buildSiteUrl('admin', currentUrl, stripPathPrefix(rawNext, '/admin'))
             : rawNext;
         }
-      } else if (!pointsToAdmin) {
+      } else if (!pointsToAdmin && rawNext !== '/login' && !hasPathPrefix(rawNext, '/auth')) {
         if (!base) {
-          return rawNext === '/login' ? defaultPrefixForSite(defaultSite) : rawNext;
+          return rawNext;
         }
         if (hasPathPrefix(rawNext, '/chat')) {
           return buildSiteUrl('chat', currentUrl, rawNext);
@@ -276,9 +282,12 @@ export function resolveSafePostLoginTarget(
     } else if (base) {
       const trustedUrl = isTrustedCrossSiteUrl(rawNext, currentUrl, base);
       if (trustedUrl) {
-        const targetSite = resolveSiteFromHostname(new URL(trustedUrl).hostname);
-        if (teacher && targetSite === 'admin') return trustedUrl;
-        if (!teacher && targetSite !== 'admin') return trustedUrl;
+        const parsed = new URL(trustedUrl);
+        const targetSite = resolveSiteFromHostname(parsed.hostname);
+        const pointsToAdmin =
+          targetSite === 'admin' || isAdminPathOnUnifiedHome(parsed.pathname, base);
+        if (teacher && pointsToAdmin) return trustedUrl;
+        if (!teacher && !pointsToAdmin) return trustedUrl;
       }
     }
   }
@@ -309,21 +318,42 @@ const ROUTE_PREFIXES: ReadonlyArray<{
   { prefix: '/admin', targetSite: 'admin' },
 ];
 
-// Menjaga isolasi domain dan mengarahkan semua rute login ke subdomain auth saat aktif.
+// Menjaga isolasi domain dan mengarahkan semua rute login ke lokasi auth aktif.
 export function resolveCanonicalRedirect(url: URL): string | null {
   const { pathname, search } = url;
   if (isPassthroughPath(pathname)) return null;
 
+  const base = resolveDomainBase(url.hostname);
   const site = resolveSiteFromHostname(url.hostname);
-  if (!site) return null;
 
-  if (pathname === '/login') {
+  if (!site) {
+    if (base?.unifiedHomeAuthAdmin) {
+      const host = normalizeHostname(url.hostname);
+      if (host === `auth.${base.rootDomain}`) {
+        return `${buildSiteUrl('auth', url, '/')}${search}`;
+      }
+      if (host === `admin.${base.rootDomain}`) {
+        return `${buildSiteUrl('admin', url, pathname)}${search}`;
+      }
+    }
+    return null;
+  }
+
+  if (pathname === '/login' || (base?.unifiedHomeAuthAdmin && hasPathPrefix(pathname, '/auth'))) {
     if (site === 'auth') return `/${search}`;
+    if (base?.unifiedHomeAuthAdmin && site === 'home') {
+      return pathname === '/login' ? `/auth${search}` : null;
+    }
     return buildAuthRedirectFromSite(url, site === 'admin' ? 'admin' : 'chat');
   }
 
   for (const { prefix, targetSite } of ROUTE_PREFIXES) {
     if (!hasPathPrefix(pathname, prefix)) continue;
+
+    if (base?.unifiedHomeAuthAdmin && targetSite === 'admin') {
+      if (site === 'home') return null;
+      return `${buildSiteUrl('admin', url, stripPathPrefix(pathname, prefix))}${search}`;
+    }
 
     if (site === targetSite) {
       if (targetSite === 'chat') return null;

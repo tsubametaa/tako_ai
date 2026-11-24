@@ -15,8 +15,8 @@ describe('subdomain routing config', () => {
   it('resolves production and local subdomain hostnames including auth', () => {
     assert.equal(resolveSiteFromHostname('ai.utaaa.io'), 'home');
     assert.equal(resolveSiteFromHostname('chat.utaaa.io'), 'chat');
-    assert.equal(resolveSiteFromHostname('admin.utaaa.io'), 'admin');
-    assert.equal(resolveSiteFromHostname('auth.utaaa.io'), 'auth');
+    assert.equal(resolveSiteFromHostname('admin.utaaa.io'), null);
+    assert.equal(resolveSiteFromHostname('auth.utaaa.io'), null);
     assert.equal(resolveSiteFromHostname('tako.ai.id'), 'home');
     assert.equal(resolveSiteFromHostname('www.tako.ai.id'), 'home');
     assert.equal(resolveSiteFromHostname('chat.tako.ai.id'), 'chat');
@@ -67,9 +67,37 @@ describe('subdomain routing config', () => {
       resolveSubdomainPathname(new URL('http://localhost:1234/')),
       '/home',
     );
+    assert.equal(
+      resolveSubdomainPathname(new URL('https://ai.utaaa.io/auth')),
+      '/login',
+    );
+    assert.equal(
+      resolveSubdomainPathname(new URL('https://ai.utaaa.io/admin/materi')),
+      undefined,
+    );
   });
 
   it('redirects cross-domain routes and /login to canonical subdomain hosts', () => {
+    assert.equal(
+      resolveCanonicalRedirect(new URL('https://ai.utaaa.io/auth')),
+      null,
+    );
+    assert.equal(
+      resolveCanonicalRedirect(new URL('https://ai.utaaa.io/login?expired=true')),
+      '/auth?expired=true',
+    );
+    assert.equal(
+      resolveCanonicalRedirect(new URL('https://ai.utaaa.io/admin/materi')),
+      null,
+    );
+    assert.equal(
+      resolveCanonicalRedirect(new URL('https://chat.utaaa.io/login?expired=true')),
+      'https://ai.utaaa.io/auth?expired=true&next=https%3A%2F%2Fchat.utaaa.io%2F',
+    );
+    assert.equal(
+      resolveCanonicalRedirect(new URL('https://chat.utaaa.io/admin/materi')),
+      'https://ai.utaaa.io/admin/materi',
+    );
     assert.equal(
       resolveCanonicalRedirect(new URL('https://tako.ai.id/')),
       null,
@@ -124,8 +152,12 @@ describe('subdomain routing config', () => {
     const utaaaHome = new URL('https://ai.utaaa.io/');
     assert.equal(buildSiteUrl('home', utaaaHome), 'https://ai.utaaa.io/');
     assert.equal(buildSiteUrl('chat', utaaaHome), 'https://chat.utaaa.io/');
-    assert.equal(buildSiteUrl('admin', utaaaHome), 'https://admin.utaaa.io/');
-    assert.equal(buildSiteUrl('auth', utaaaHome), 'https://auth.utaaa.io/');
+    assert.equal(buildSiteUrl('admin', utaaaHome), 'https://ai.utaaa.io/admin');
+    assert.equal(buildSiteUrl('auth', utaaaHome), 'https://ai.utaaa.io/auth');
+    assert.equal(
+      buildAuthLoginUrl(new URL('https://chat.utaaa.io/chat/room-1'), '/chat/room-1'),
+      'https://ai.utaaa.io/auth?next=https%3A%2F%2Fchat.utaaa.io%2Fchat%2Froom-1',
+    );
 
     const prodHome = new URL('https://tako.ai.id/');
     assert.equal(buildSiteUrl('chat', prodHome), 'https://chat.tako.ai.id/');
@@ -165,10 +197,24 @@ describe('subdomain routing config', () => {
     // Guru/teacher goes directly to admin dashboard even when next points to chat
     assert.equal(
       resolveSafePostLoginTarget(
-        new URL('https://auth.utaaa.io/?next=https%3A%2F%2Fchat.utaaa.io%2F'),
+        new URL('https://ai.utaaa.io/auth?next=https%3A%2F%2Fchat.utaaa.io%2F'),
         'teacher',
       ),
-      'https://admin.utaaa.io/',
+      'https://ai.utaaa.io/admin',
+    );
+    assert.equal(
+      resolveSafePostLoginTarget(
+        new URL('https://ai.utaaa.io/auth?next=https%3A%2F%2Fai.utaaa.io%2Fadmin%2Fmateri'),
+        'teacher',
+      ),
+      'https://ai.utaaa.io/admin/materi',
+    );
+    assert.equal(
+      resolveSafePostLoginTarget(
+        new URL('https://ai.utaaa.io/auth?next=https%3A%2F%2Fai.utaaa.io%2Fadmin%2Fmateri'),
+        'student',
+      ),
+      'https://chat.utaaa.io/',
     );
     assert.equal(
       resolveSafePostLoginTarget(

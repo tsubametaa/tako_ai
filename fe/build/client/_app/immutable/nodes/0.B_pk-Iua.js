@@ -1,1 +1,0 @@
-import{A as e,Y as t,k as n,w as r}from"../chunks/DMkmXFON.js";function i(i,a){var o=e(),s=t(o);r(s,()=>a.children),n(i,o)}export{i as component};
