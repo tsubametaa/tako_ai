@@ -42,7 +42,7 @@
     ? 'Deep Think aktif (Mode Terstruktur). Klik untuk matikan.'
     : 'Aktifkan Deep Think (Mode Terstruktur)'}
   title={active
-    ? 'Deep Think aktif: TAKO membimbing bertahap langkah demi langkah'
+    ? 'Deep Think aktif: NEKO membimbing bertahap langkah demi langkah'
     : 'Aktifkan Deep Think (Mode Terstruktur)'}
   {disabled}
   onclick={handleClick}
@@ -114,9 +114,9 @@
     color: transparent;
     background-image: linear-gradient(
       110deg,
-      #1a201c 35%,
-      #b98300 50%,
-      #1a201c 65%
+      #18181b 35%,
+      #b45309 50%,
+      #18181b 65%
     );
     background-size: 240% 100%;
     background-clip: text;
@@ -127,9 +127,9 @@
   :global(html[data-theme='dark']) .deep-think-shimmer {
     background-image: linear-gradient(
       110deg,
-      #e1ad01 35%,
-      #fff5cc 50%,
-      #e1ad01 65%
+      #f59e0b 35%,
+      #fef3c7 50%,
+      #f59e0b 65%
     );
   }
 

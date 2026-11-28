@@ -41,7 +41,7 @@ export class ApiError extends Error {
 function resolveSharedCookieDomain(hostname: string): string | null {
   const host = hostname.trim().toLowerCase();
   if (host === 'utaaa.io' || host.endsWith('.utaaa.io')) return '.utaaa.io';
-  if (host === 'tako.ai.id' || host.endsWith('.tako.ai.id')) return '.tako.ai.id';
+  if (host === 'neko.ai.id' || host.endsWith('.neko.ai.id')) return '.neko.ai.id';
   return null;
 }
 

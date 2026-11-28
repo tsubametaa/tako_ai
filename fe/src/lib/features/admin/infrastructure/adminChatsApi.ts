@@ -143,7 +143,7 @@ export async function exportAdminChatsJson(
   const today = new Date().toISOString().slice(0, 10);
   const filename = resolveDownloadFilename(
     res.headers.get('Content-Disposition'),
-    `tako-ai-chat-history-${scope}-${today}.json`,
+    `neko-ai-chat-history-${scope}-${today}.json`,
   );
 
   const objectUrl = URL.createObjectURL(blob);

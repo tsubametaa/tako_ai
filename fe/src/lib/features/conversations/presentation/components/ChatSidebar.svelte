@@ -13,7 +13,7 @@
     X,
   } from "@lucide/svelte";
   import type { SettingsTab } from "$lib/features/settings";
-  import { Button, Input } from "$lib/shared/ui";
+  import { Button, Input, NekoMark } from "$lib/shared/ui";
   import type {
     Conversation,
     ConversationGroup,
@@ -62,14 +62,9 @@
   <div class="flex flex-col gap-3 p-3 border-b-2 border-line">
     <div class="flex items-center justify-between">
       <div class="flex items-center gap-2">
-        <div
-          class="flex h-8 w-8 items-center justify-center rounded-xl border-2 border-line bg-mustard text-xs font-extrabold text-on-mustard shadow-[2px_2px_0px_var(--neo-shadow-color)]"
-          aria-hidden="true"
-        >
-          T
-        </div>
+        <NekoMark size="sm" />
         <span class="text-sm font-extrabold tracking-tight text-ink">
-          TAKO <span class="text-primary">AI</span>
+          NEKO <span class="text-primary">AI</span>
         </span>
       </div>
 

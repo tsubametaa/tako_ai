@@ -15,7 +15,7 @@
 </script>
 
 <svelte:head>
-  <title>Audit Auto-Learn - Tako Admin</title>
+  <title>Audit Auto-Learn - Neko Admin</title>
 </svelte:head>
 
 <Card class="flex flex-col items-start gap-5 p-6 md:p-8">

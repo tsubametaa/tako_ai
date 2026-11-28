@@ -122,8 +122,8 @@
   --tw-prose-quote-borders: var(--mustard);
   --tw-prose-captions: var(--muted);
   --tw-prose-code: var(--text);
-  --tw-prose-pre-code: #eff4f1;
-  --tw-prose-pre-bg: #121714;
+  --tw-prose-pre-code: #f4f4f8;
+  --tw-prose-pre-bg: #12111d;
   --tw-prose-th-borders: var(--border);
   --tw-prose-td-borders: var(--border-subtle);
   color: var(--text) !important;

@@ -10,7 +10,7 @@
 </script>
 
 <svelte:head>
-  <title>Materi Global - Tako Admin</title>
+  <title>Materi Global - Neko Admin</title>
 </svelte:head>
 
 <Card class="flex flex-col items-start gap-5 p-6 md:p-8">

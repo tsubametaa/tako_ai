@@ -77,7 +77,7 @@
   <div class="flex flex-wrap items-start justify-between gap-3">
     <div>
       <h3 class="text-sm font-extrabold text-ink md:text-base">
-        Tren Pertanyaan Harian ke TAKO AI ({days} Hari Terakhir)
+        Tren Pertanyaan Harian ke NEKO AI ({days} Hari Terakhir)
       </h3>
       <p class="mt-0.5 text-xs font-medium text-muted">
         Total <strong class="font-extrabold text-ink tabular-nums">{periodQuestions}</strong> pertanyaan dalam periode ini (Mode Umum vs Deep Think).
@@ -105,7 +105,7 @@
       <BarChart3 class="h-6 w-6 text-muted" aria-hidden="true" />
       <p class="text-xs font-extrabold text-ink">Belum ada aktivitas chat pada {days} hari terakhir</p>
       <p class="max-w-sm text-[11px] text-muted">
-        Grafik akan terisi otomatis ketika siswa mulai mengajukan pertanyaan ke TAKO AI.
+        Grafik akan terisi otomatis ketika siswa mulai mengajukan pertanyaan ke NEKO AI.
       </p>
     </div>
   {:else}

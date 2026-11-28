@@ -53,7 +53,7 @@ export const ABOUT_CAPABILITIES: AboutCapability[] = [
     id: 'sources',
     title: 'Rujukan Materi Kurikulum Jelas',
     description:
-      'Penjelasan TAKO mengacu pada bahan ajar KKA yang dikelola guru, lengkap dengan panel sumber untuk meninjau topik dan kutipannya.',
+      'Penjelasan NEKO mengacu pada bahan ajar KKA yang dikelola guru, lengkap dengan panel sumber untuk meninjau topik dan kutipannya.',
   },
   {
     id: 'personalization',

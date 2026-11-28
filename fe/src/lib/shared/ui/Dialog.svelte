@@ -30,6 +30,7 @@
     }}
   >
     <div
+      data-slot="dialog-content"
       role="dialog"
       aria-modal="true"
       aria-labelledby="dialog-title"

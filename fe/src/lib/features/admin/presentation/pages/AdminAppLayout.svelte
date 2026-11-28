@@ -111,6 +111,6 @@
   </AdminShell>
 {:else}
   <div class="flex min-h-dvh items-center justify-center bg-background text-sm font-semibold text-muted">
-    Memverifikasi akses guru TAKO AI…
+    Memverifikasi akses guru NEKO AI…
   </div>
 {/if}

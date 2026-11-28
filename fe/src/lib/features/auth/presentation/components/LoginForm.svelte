@@ -2,7 +2,7 @@
   import { AlertCircle, Eye, EyeOff, Loader2, LogIn } from '@lucide/svelte';
   import { cubicOut } from 'svelte/easing';
   import { fly, slide } from 'svelte/transition';
-  import { Button, Card, Input } from '$lib/shared/ui';
+  import { Button, Card, Input, NekoMark } from '$lib/shared/ui';
 
   interface Props {
     usernameOrEmail: string;
@@ -39,12 +39,18 @@
 >
 <Card class="flex w-full flex-col gap-6 rounded-2xl border-2 border-line bg-surface p-6 shadow-[4px_4px_0px_var(--neo-shadow-color)] sm:p-7">
   <!-- CardHeader (shadcn/ui pattern) -->
-  <div class="flex flex-col gap-1.5">
+  <div data-slot="card-header" class="flex flex-col gap-2">
+    <div class="flex items-center gap-2">
+      <NekoMark size="sm" />
+      <span class="text-sm font-extrabold tracking-tight text-ink">
+        NEKO <span class="text-primary">AI</span>
+      </span>
+    </div>
     <h1 class="text-xl font-extrabold tracking-tight text-ink sm:text-2xl">
       Masuk ke Akun
     </h1>
     <p class="text-xs leading-relaxed font-medium text-muted sm:text-[13px]">
-      Masukkan nama pengguna atau NIS untuk mengakses ruang belajar TAKO AI.
+      Masukkan nama pengguna atau NIS untuk mengakses ruang belajar NEKO AI.
     </p>
   </div>
 

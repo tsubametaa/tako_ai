@@ -225,7 +225,7 @@
           placeholder={attachments.length > 0
             ? 'Tulis pertanyaan atau hal yang ingin kamu diskusikan dari berkas ini…'
             : deepThink
-              ? 'Deep Think aktif — TAKO akan membimbingmu bertahap langkah demi langkah…'
+              ? 'Deep Think aktif — NEKO akan membimbingmu bertahap langkah demi langkah…'
               : 'Tanyakan materi KKA atau ceritakan bagian yang belum kamu pahami…'}
           class="composer-textarea block max-h-[200px] min-h-[36px] w-full resize-none border-0 bg-transparent px-0 py-1.5 text-sm leading-6 text-ink placeholder:text-muted/60 outline-none ring-0 focus:border-0 focus:outline-hidden focus:ring-0 focus-visible:border-0 focus-visible:outline-hidden focus-visible:ring-0"
           style="outline: none !important; box-shadow: none !important;"
@@ -328,7 +328,7 @@
       class="flex items-center justify-center px-1 text-center text-[11px] text-muted"
     >
       <span>
-        TAKO AI • Konfirmasi jawaban kepada guru jika masih ragu
+        NEKO AI • Konfirmasi jawaban kepada guru jika masih ragu
       </span>
     </div>
   </div>

@@ -91,7 +91,7 @@
               Pengaturan & Preferensi
             </h2>
             <p class="text-[10.5px] md:text-[11px] text-muted">
-              Personalisasi jawaban TAKO AI, tema visual, dan profil akun
+              Personalisasi jawaban NEKO AI, tema visual, dan profil akun
             </p>
           </div>
         </div>

@@ -1,14 +1,14 @@
 <script lang="ts">
-  import { BookOpen, CheckCircle2, MessageSquare, Bot } from '@lucide/svelte';
-  import { Card } from '$lib/shared/ui';
+  import { BookOpen, CheckCircle2, MessageSquare } from '@lucide/svelte';
+  import { Card, NekoMark } from '$lib/shared/ui';
 </script>
 
 <div class="hidden flex-col justify-between p-8 lg:flex lg:w-1/2">
   <div class="flex items-center gap-2.5">
-    <div class="flex h-10 w-10 items-center justify-center rounded-xl border-2 border-line bg-mustard text-on-mustard shadow-[2.5px_2.5px_0px_var(--neo-shadow-color)]">
-      <Bot class="h-5 w-5" aria-hidden="true" />
-    </div>
-    <span class="text-base font-extrabold text-ink">TAKO AI</span>
+    <NekoMark size="lg" />
+    <span class="text-base font-extrabold text-ink">
+      NEKO <span class="text-primary">AI</span>
+    </span>
   </div>
 
   <div class="my-auto flex flex-col gap-6 max-w-md">

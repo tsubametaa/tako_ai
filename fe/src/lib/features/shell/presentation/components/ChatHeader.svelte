@@ -50,7 +50,7 @@
       <h1 class="truncate text-base font-bold text-ink md:text-lg" title={title}>
         {title}
       </h1>
-      <span class="text-xs font-semibold text-muted">TAKO AI</span>
+      <span class="text-xs font-semibold text-muted">NEKO AI</span>
     </div>
   </div>
 

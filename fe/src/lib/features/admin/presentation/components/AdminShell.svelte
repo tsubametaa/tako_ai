@@ -11,13 +11,13 @@
     PanelLeft,
     PanelLeftClose,
     PanelLeftOpen,
-    ShieldCheck,
     User,
     Users,
     X,
   } from '@lucide/svelte';
   import type { ResolvedTheme, ThemePreference } from '$lib/features/theme';
   import { ThemeToggle } from '$lib/features/theme';
+  import { NekoMark } from '$lib/shared/ui';
   import type { AdminSectionId } from '../../domain/navigation';
 
   export interface AdminNavLink {
@@ -109,12 +109,10 @@
       <div class="flex min-h-0 flex-1 flex-col overflow-hidden">
         <div class="flex h-16 shrink-0 items-center justify-between border-b-2 border-line px-4">
           <div class="flex items-center gap-2.5">
-            <div class="flex h-9 w-9 items-center justify-center rounded-xl border-2 border-line bg-mustard text-on-mustard shadow-[2px_2px_0px_var(--neo-shadow-color)]">
-              <ShieldCheck class="h-5 w-5" aria-hidden="true" />
-            </div>
+            <NekoMark size="md" />
             <div class="flex flex-col">
               <span class="text-sm font-extrabold text-ink">
-                TAKO <span class="text-primary">AI</span>
+                NEKO <span class="text-primary">AI</span>
               </span>
               <span class="text-[11px] font-semibold text-muted">Panel Admin & Guru</span>
             </div>

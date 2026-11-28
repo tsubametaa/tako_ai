@@ -3,6 +3,7 @@
   import { cubicOut } from 'svelte/easing';
   import { fly } from 'svelte/transition';
   import { magnetic, reveal } from '$lib/shared/motion';
+  import { NekoMark } from '$lib/shared/ui';
   import type {
     AboutCapability,
     AboutDialogueExample,
@@ -61,7 +62,7 @@
           Teman Belajar Koding & Kecerdasan Artifisial untuk Kelas X
         </h2>
         <p class="text-[13.5px] leading-relaxed font-medium text-muted sm:text-base">
-          TAKO AI dibuat khusus buat siswa SMA/SMK yang sedang belajar Koding dan Kecerdasan Artifisial (KKA). Alih-alih langsung menyuapi jawaban jadi, TAKO mengajak kamu berdiskusi langkah demi langkah supaya konsepnya benar-benar masuk akal.
+          NEKO AI dibuat khusus buat siswa SMA/SMK yang sedang belajar Koding dan Kecerdasan Artifisial (KKA). Alih-alih langsung menyuapi jawaban jadi, NEKO mengajak kamu berdiskusi langkah demi langkah supaya konsepnya benar-benar masuk akal.
         </p>
         <p class="text-[13.5px] leading-relaxed font-medium text-muted sm:text-base">
           Setiap penjelasan terhubung dengan materi kurikulum yang dikelola guru, jadi kamu bisa belajar mandiri, latihan berpikir komputasional, dan cek langsung rujukan babnya.
@@ -73,7 +74,7 @@
           <div class="flex flex-col gap-2.5 sm:gap-3">
             <div class="flex items-center justify-between gap-2">
               <span class="text-xs font-extrabold tracking-tight text-ink sm:text-sm">
-                Simulasi Cara TAKO Membimbing
+                Simulasi Cara NEKO Membimbing
               </span>
               <span class="text-[11px] font-semibold text-muted sm:hidden">
                 {activeIndex + 1}/{dialogues.length}
@@ -126,14 +127,9 @@
                   class="flex w-full flex-col gap-2.5 rounded-2xl rounded-bl-sm border-2 border-line bg-surface-soft p-3.5 text-[13px] leading-relaxed text-ink sm:mr-auto sm:max-w-[94%] sm:gap-3 sm:rounded-xl sm:p-4 sm:text-sm"
                 >
                   <div class="flex items-center gap-2">
-                    <span
-                      class="inline-flex h-5 w-5 items-center justify-center rounded-md border border-line bg-mustard text-[10px] font-extrabold text-on-mustard"
-                      aria-hidden="true"
-                    >
-                      T
-                    </span>
+                    <NekoMark size="xs" />
                     <span class="text-[11px] font-extrabold tracking-wide text-muted uppercase">
-                      TAKO AI
+                      NEKO AI
                     </span>
                   </div>
 
@@ -165,7 +161,7 @@
             Bikin Paham Konsep, Bukan Sekadar Copy-Paste
           </h3>
           <p class="text-[13.5px] leading-relaxed font-semibold sm:text-sm md:text-base">
-            TAKO memandu proses berpikir kamu dari pertanyaan pemantik, petunjuk bertahap, sampai latihan menjelaskan kembali dengan bahasa sendiri.
+            NEKO memandu proses berpikir kamu dari pertanyaan pemantik, petunjuk bertahap, sampai latihan menjelaskan kembali dengan bahasa sendiri.
           </p>
         </div>
 
@@ -175,7 +171,7 @@
             use:magnetic={{ strength: 4 }}
             class="neo-control group inline-flex min-h-[44px] w-full items-center justify-center gap-2 bg-surface px-5 py-2.5 text-sm font-extrabold text-ink hover:bg-surface-soft sm:w-auto"
           >
-            <span>Coba Tanya TAKO Sekarang</span>
+            <span>Coba Tanya NEKO Sekarang</span>
             <ArrowRight
               class="h-4 w-4 shrink-0 transition-transform duration-200 group-hover:translate-x-1"
               aria-hidden="true"

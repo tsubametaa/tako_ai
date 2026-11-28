@@ -20,16 +20,16 @@ const HOST_TO_SITE: Record<string, SubdomainSite> = {
   'utaaa.io': 'home',
   'www.utaaa.io': 'home',
   'chat.utaaa.io': 'chat',
-  'tako.ai.id': 'home',
-  'www.tako.ai.id': 'home',
-  'chat.tako.ai.id': 'chat',
-  'admin.tako.ai.id': 'admin',
-  'auth.tako.ai.id': 'auth',
-  'tako.localhost': 'home',
-  'www.tako.localhost': 'home',
-  'chat.tako.localhost': 'chat',
-  'admin.tako.localhost': 'admin',
-  'auth.tako.localhost': 'auth',
+  'neko.ai.id': 'home',
+  'www.neko.ai.id': 'home',
+  'chat.neko.ai.id': 'chat',
+  'admin.neko.ai.id': 'admin',
+  'auth.neko.ai.id': 'auth',
+  'neko.localhost': 'home',
+  'www.neko.localhost': 'home',
+  'chat.neko.localhost': 'chat',
+  'admin.neko.localhost': 'admin',
+  'auth.neko.localhost': 'auth',
   'ai.localhost': 'home',
   'chat.localhost': 'chat',
   'admin.localhost': 'admin',
@@ -48,11 +48,11 @@ function resolveDomainBase(hostname: string): DomainBase | null {
   if (host === 'utaaa.io' || host.endsWith('.utaaa.io')) {
     return { rootDomain: 'utaaa.io', homeHost: 'ai.utaaa.io', unifiedHomeAuthAdmin: true };
   }
-  if (host === 'tako.ai.id' || host.endsWith('.tako.ai.id')) {
-    return { rootDomain: 'tako.ai.id', homeHost: 'tako.ai.id' };
+  if (host === 'neko.ai.id' || host.endsWith('.neko.ai.id')) {
+    return { rootDomain: 'neko.ai.id', homeHost: 'neko.ai.id' };
   }
-  if (host === 'tako.localhost' || host.endsWith('.tako.localhost')) {
-    return { rootDomain: 'tako.localhost', homeHost: 'tako.localhost' };
+  if (host === 'neko.localhost' || host.endsWith('.neko.localhost')) {
+    return { rootDomain: 'neko.localhost', homeHost: 'neko.localhost' };
   }
   if (['ai.localhost', 'chat.localhost', 'admin.localhost', 'auth.localhost'].includes(host)) {
     return { rootDomain: 'localhost', homeHost: 'ai.localhost' };

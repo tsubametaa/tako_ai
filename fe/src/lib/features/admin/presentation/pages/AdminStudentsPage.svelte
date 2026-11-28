@@ -39,7 +39,7 @@
 </script>
 
 <svelte:head>
-  <title>Kelola Akun Siswa - TAKO AI</title>
+  <title>Kelola Akun Siswa - NEKO AI</title>
 </svelte:head>
 
 <div class="flex flex-col gap-5">
@@ -135,7 +135,7 @@
       <div class="flex flex-col items-center gap-3 py-10 text-center">
         <p class="text-sm font-bold text-ink">Belum ada akun siswa yang cocok</p>
         <p class="max-w-sm text-xs font-medium text-muted">
-          Coba ubah kata kunci pencarian atau tambahkan akun siswa baru agar siswa dapat login ke TAKO AI.
+          Coba ubah kata kunci pencarian atau tambahkan akun siswa baru agar siswa dapat login ke NEKO AI.
         </p>
         <Button variant="primary" size="sm" onclick={() => ctrl.openCreate()}>
           <Plus class="h-4 w-4" aria-hidden="true" />
@@ -302,7 +302,7 @@
 >
   {#if ctrl.deleteTarget}
     <p class="leading-relaxed text-ink">
-      Akun <strong>{ctrl.deleteTarget.fullName}</strong> (<code>@{ctrl.deleteTarget.username}</code>) akan dihapus permanen dari database sekolah dan tidak bisa lagi login ke TAKO AI.
+      Akun <strong>{ctrl.deleteTarget.fullName}</strong> (<code>@{ctrl.deleteTarget.username}</code>) akan dihapus permanen dari database sekolah dan tidak bisa lagi login ke NEKO AI.
     </p>
   {/if}
 

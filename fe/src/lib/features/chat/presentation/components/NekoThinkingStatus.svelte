@@ -21,9 +21,9 @@
       return 'Tunggu ya…';
     }
     if (elapsedMs >= 2600 || hasSources || status === 'generating') {
-      return 'Tako lagi menyusun jawaban…';
+      return 'Neko lagi menyusun jawaban…';
     }
-    return 'Tako lagi berfikir…';
+    return 'Neko lagi berfikir…';
   });
 
   onMount(() => {
@@ -48,7 +48,7 @@
     {#key stageLabel}
       <span
         in:fly={{ y: 4, duration: 180, easing: cubicOut }}
-        class="tako-shimmer truncate text-sm font-semibold tracking-tight"
+        class="neko-shimmer truncate text-sm font-semibold tracking-tight"
       >
         {stageLabel}
       </span>

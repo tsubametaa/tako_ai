@@ -117,7 +117,7 @@ export interface TechTextSettings {
 }
 
 export const DEFAULT_TECH_TEXT_SETTINGS: TechTextSettings = {
-  text: 'TAKO AI',
+  text: 'NEKO AI',
   fontFamily: '',
   fontWeight: 800,
   fontSize: 150,

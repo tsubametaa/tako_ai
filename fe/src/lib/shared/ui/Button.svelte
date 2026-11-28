@@ -45,7 +45,8 @@
 <button
   {type}
   {disabled}
-  class="neo-control inline-flex items-center justify-center gap-2 select-none disabled:pointer-events-none disabled:opacity-50 {variantClasses[variant]} {sizeClasses[size]} {className}"
+  data-slot="button"
+  class="neo-control inline-flex items-center justify-center gap-2 select-none focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50 {variantClasses[variant]} {sizeClasses[size]} {className}"
   {...restProps}
 >
   {#if children}

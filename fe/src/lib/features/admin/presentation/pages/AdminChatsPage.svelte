@@ -241,7 +241,7 @@
                     <span class="text-xs font-extrabold text-ink">
                       {msg.role === 'user'
                         ? ctrl.selectedConversation.studentName
-                        : 'TAKO AI'}
+                        : 'NEKO AI'}
                     </span>
                     <span class="text-[10.5px] text-muted">
                       • {formatDateTime(msg.createdAt)}

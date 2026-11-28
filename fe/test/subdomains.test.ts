@@ -17,50 +17,50 @@ describe('subdomain routing config', () => {
     assert.equal(resolveSiteFromHostname('chat.utaaa.io'), 'chat');
     assert.equal(resolveSiteFromHostname('admin.utaaa.io'), null);
     assert.equal(resolveSiteFromHostname('auth.utaaa.io'), null);
-    assert.equal(resolveSiteFromHostname('tako.ai.id'), 'home');
-    assert.equal(resolveSiteFromHostname('www.tako.ai.id'), 'home');
-    assert.equal(resolveSiteFromHostname('chat.tako.ai.id'), 'chat');
-    assert.equal(resolveSiteFromHostname('admin.tako.ai.id'), 'admin');
-    assert.equal(resolveSiteFromHostname('auth.tako.ai.id'), 'auth');
-    assert.equal(resolveSiteFromHostname('tako.localhost'), 'home');
-    assert.equal(resolveSiteFromHostname('chat.tako.localhost'), 'chat');
-    assert.equal(resolveSiteFromHostname('admin.tako.localhost'), 'admin');
-    assert.equal(resolveSiteFromHostname('auth.tako.localhost'), 'auth');
+    assert.equal(resolveSiteFromHostname('neko.ai.id'), 'home');
+    assert.equal(resolveSiteFromHostname('www.neko.ai.id'), 'home');
+    assert.equal(resolveSiteFromHostname('chat.neko.ai.id'), 'chat');
+    assert.equal(resolveSiteFromHostname('admin.neko.ai.id'), 'admin');
+    assert.equal(resolveSiteFromHostname('auth.neko.ai.id'), 'auth');
+    assert.equal(resolveSiteFromHostname('neko.localhost'), 'home');
+    assert.equal(resolveSiteFromHostname('chat.neko.localhost'), 'chat');
+    assert.equal(resolveSiteFromHostname('admin.neko.localhost'), 'admin');
+    assert.equal(resolveSiteFromHostname('auth.neko.localhost'), 'auth');
     assert.equal(resolveSiteFromHostname('localhost'), null);
     assert.equal(resolveSiteFromHostname('127.0.0.1'), null);
   });
 
   it('reroutes root and nested paths per subdomain without mutating assets or api', () => {
     assert.equal(
-      resolveSubdomainPathname(new URL('https://tako.ai.id/')),
+      resolveSubdomainPathname(new URL('https://neko.ai.id/')),
       '/home',
     );
     assert.equal(
-      resolveSubdomainPathname(new URL('https://auth.tako.ai.id/')),
+      resolveSubdomainPathname(new URL('https://auth.neko.ai.id/')),
       '/login',
     );
     assert.equal(
-      resolveSubdomainPathname(new URL('https://chat.tako.ai.id/')),
+      resolveSubdomainPathname(new URL('https://chat.neko.ai.id/')),
       '/chat',
     );
     assert.equal(
-      resolveSubdomainPathname(new URL('https://chat.tako.ai.id/chat/room-1')),
+      resolveSubdomainPathname(new URL('https://chat.neko.ai.id/chat/room-1')),
       undefined,
     );
     assert.equal(
-      resolveSubdomainPathname(new URL('https://admin.tako.ai.id/')),
+      resolveSubdomainPathname(new URL('https://admin.neko.ai.id/')),
       '/admin',
     );
     assert.equal(
-      resolveSubdomainPathname(new URL('https://admin.tako.ai.id/materi')),
+      resolveSubdomainPathname(new URL('https://admin.neko.ai.id/materi')),
       '/admin/materi',
     );
     assert.equal(
-      resolveSubdomainPathname(new URL('https://auth.tako.ai.id/api/v1/health')),
+      resolveSubdomainPathname(new URL('https://auth.neko.ai.id/api/v1/health')),
       undefined,
     );
     assert.equal(
-      resolveSubdomainPathname(new URL('https://admin.tako.ai.id/favicon.svg')),
+      resolveSubdomainPathname(new URL('https://admin.neko.ai.id/favicon.svg')),
       undefined,
     );
     assert.equal(
@@ -99,47 +99,47 @@ describe('subdomain routing config', () => {
       'https://ai.utaaa.io/admin/materi',
     );
     assert.equal(
-      resolveCanonicalRedirect(new URL('https://tako.ai.id/')),
+      resolveCanonicalRedirect(new URL('https://neko.ai.id/')),
       null,
     );
     assert.equal(
-      resolveCanonicalRedirect(new URL('https://auth.tako.ai.id/')),
+      resolveCanonicalRedirect(new URL('https://auth.neko.ai.id/')),
       null,
     );
     assert.equal(
-      resolveCanonicalRedirect(new URL('https://auth.tako.ai.id/login?expired=true')),
+      resolveCanonicalRedirect(new URL('https://auth.neko.ai.id/login?expired=true')),
       '/?expired=true',
     );
     assert.equal(
-      resolveCanonicalRedirect(new URL('https://auth.tako.ai.id/chat/demo-1')),
-      'https://chat.tako.ai.id/chat/demo-1',
+      resolveCanonicalRedirect(new URL('https://auth.neko.ai.id/chat/demo-1')),
+      'https://chat.neko.ai.id/chat/demo-1',
     );
     assert.equal(
-      resolveCanonicalRedirect(new URL('https://tako.ai.id/home')),
+      resolveCanonicalRedirect(new URL('https://neko.ai.id/home')),
       '/',
     );
     assert.equal(
-      resolveCanonicalRedirect(new URL('https://tako.ai.id/chat')),
-      'https://chat.tako.ai.id/',
+      resolveCanonicalRedirect(new URL('https://neko.ai.id/chat')),
+      'https://chat.neko.ai.id/',
     );
     assert.equal(
-      resolveCanonicalRedirect(new URL('https://tako.ai.id/login')),
-      'https://auth.tako.ai.id/?next=https%3A%2F%2Fchat.tako.ai.id%2F',
+      resolveCanonicalRedirect(new URL('https://neko.ai.id/login')),
+      'https://auth.neko.ai.id/?next=https%3A%2F%2Fchat.neko.ai.id%2F',
     );
     assert.equal(
-      resolveCanonicalRedirect(new URL('https://chat.tako.ai.id/login?expired=true')),
-      'https://auth.tako.ai.id/?expired=true&next=https%3A%2F%2Fchat.tako.ai.id%2F',
+      resolveCanonicalRedirect(new URL('https://chat.neko.ai.id/login?expired=true')),
+      'https://auth.neko.ai.id/?expired=true&next=https%3A%2F%2Fchat.neko.ai.id%2F',
     );
     assert.equal(
-      resolveCanonicalRedirect(new URL('https://admin.tako.ai.id/login')),
-      'https://auth.tako.ai.id/?next=https%3A%2F%2Fadmin.tako.ai.id%2F',
+      resolveCanonicalRedirect(new URL('https://admin.neko.ai.id/login')),
+      'https://auth.neko.ai.id/?next=https%3A%2F%2Fadmin.neko.ai.id%2F',
     );
     assert.equal(
-      resolveCanonicalRedirect(new URL('https://chat.tako.ai.id/admin/materi')),
-      'https://admin.tako.ai.id/materi',
+      resolveCanonicalRedirect(new URL('https://chat.neko.ai.id/admin/materi')),
+      'https://admin.neko.ai.id/materi',
     );
     assert.equal(
-      resolveCanonicalRedirect(new URL('https://admin.tako.ai.id/admin/audit')),
+      resolveCanonicalRedirect(new URL('https://admin.neko.ai.id/admin/audit')),
       '/audit',
     );
     assert.equal(
@@ -159,19 +159,19 @@ describe('subdomain routing config', () => {
       'https://ai.utaaa.io/auth?next=https%3A%2F%2Fchat.utaaa.io%2Fchat%2Froom-1',
     );
 
-    const prodHome = new URL('https://tako.ai.id/');
-    assert.equal(buildSiteUrl('chat', prodHome), 'https://chat.tako.ai.id/');
-    assert.equal(buildSiteUrl('admin', prodHome), 'https://admin.tako.ai.id/');
-    assert.equal(buildSiteUrl('auth', prodHome), 'https://auth.tako.ai.id/');
+    const prodHome = new URL('https://neko.ai.id/');
+    assert.equal(buildSiteUrl('chat', prodHome), 'https://chat.neko.ai.id/');
+    assert.equal(buildSiteUrl('admin', prodHome), 'https://admin.neko.ai.id/');
+    assert.equal(buildSiteUrl('auth', prodHome), 'https://auth.neko.ai.id/');
     assert.equal(
-      buildAuthLoginUrl(prodHome, 'https://admin.tako.ai.id/materi'),
-      'https://auth.tako.ai.id/?next=https%3A%2F%2Fadmin.tako.ai.id%2Fmateri',
+      buildAuthLoginUrl(prodHome, 'https://admin.neko.ai.id/materi'),
+      'https://auth.neko.ai.id/?next=https%3A%2F%2Fadmin.neko.ai.id%2Fmateri',
     );
 
-    const localSub = new URL('http://chat.tako.localhost:1234/');
+    const localSub = new URL('http://chat.neko.localhost:1234/');
     assert.equal(
       buildSiteUrl('auth', localSub),
-      'http://auth.tako.localhost:1234/',
+      'http://auth.neko.localhost:1234/',
     );
 
     const plainLocal = new URL('http://localhost:1234/');
@@ -183,7 +183,7 @@ describe('subdomain routing config', () => {
     );
 
     assert.equal(
-      buildSitePath('admin', new URL('https://admin.tako.ai.id/'), '/materi'),
+      buildSitePath('admin', new URL('https://admin.neko.ai.id/'), '/materi'),
       '/materi',
     );
     assert.equal(
@@ -225,10 +225,10 @@ describe('subdomain routing config', () => {
     );
     assert.equal(
       resolveSafePostLoginTarget(
-        new URL('https://auth.tako.ai.id/?next=https%3A%2F%2Fadmin.tako.ai.id%2Fmateri'),
+        new URL('https://auth.neko.ai.id/?next=https%3A%2F%2Fadmin.neko.ai.id%2Fmateri'),
         'teacher',
       ),
-      'https://admin.tako.ai.id/materi',
+      'https://admin.neko.ai.id/materi',
     );
     assert.equal(
       resolveSafePostLoginTarget(
@@ -241,10 +241,10 @@ describe('subdomain routing config', () => {
     // Student cannot be redirected to admin even if next points to /admin
     assert.equal(
       resolveSafePostLoginTarget(
-        new URL('https://auth.tako.ai.id/?next=https%3A%2F%2Fadmin.tako.ai.id%2Fmateri'),
+        new URL('https://auth.neko.ai.id/?next=https%3A%2F%2Fadmin.neko.ai.id%2Fmateri'),
         'student',
       ),
-      'https://chat.tako.ai.id/',
+      'https://chat.neko.ai.id/',
     );
     assert.equal(
       resolveSafePostLoginTarget(
@@ -255,28 +255,28 @@ describe('subdomain routing config', () => {
     );
     assert.equal(
       resolveSafePostLoginTarget(
-        new URL('https://auth.tako.ai.id/?next=https%3A%2F%2Fevil.example%2Fphish'),
+        new URL('https://auth.neko.ai.id/?next=https%3A%2F%2Fevil.example%2Fphish'),
         'student',
       ),
-      'https://chat.tako.ai.id/',
+      'https://chat.neko.ai.id/',
     );
     assert.equal(
       resolveSafePostLoginTarget(
-        new URL('https://auth.tako.ai.id/?next=//evil.example'),
+        new URL('https://auth.neko.ai.id/?next=//evil.example'),
         'teacher',
       ),
-      'https://admin.tako.ai.id/',
+      'https://admin.neko.ai.id/',
     );
     assert.equal(
       resolveSafePostLoginTarget(
-        new URL('https://auth.tako.ai.id/?next=https%3A%2F%2Fauth.tako.ai.id%2F'),
+        new URL('https://auth.neko.ai.id/?next=https%3A%2F%2Fauth.neko.ai.id%2F'),
         'student',
       ),
-      'https://chat.tako.ai.id/',
+      'https://chat.neko.ai.id/',
     );
     assert.equal(
-      resolveSafePostLoginTarget(new URL('https://auth.tako.ai.id/'), 'guru'),
-      'https://admin.tako.ai.id/',
+      resolveSafePostLoginTarget(new URL('https://auth.neko.ai.id/'), 'guru'),
+      'https://admin.neko.ai.id/',
     );
     assert.equal(
       resolveSafePostLoginTarget(

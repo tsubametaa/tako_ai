@@ -10,7 +10,7 @@
   let { children, class: className = '', ...restProps }: Props = $props();
 </script>
 
-<div class="neo-box p-5 md:p-6 {className}" {...restProps}>
+<div data-slot="card" class="neo-box p-5 md:p-6 {className}" {...restProps}>
   {#if children}
     {@render children()}
   {/if}

@@ -41,7 +41,7 @@
       <BookOpenCheck class="h-6 w-6 text-muted" aria-hidden="true" />
       <p class="text-xs font-extrabold text-ink">Belum ada topik pertanyaan yang terekam</p>
       <p class="text-[11px] text-muted">
-        Ringkasan topik terpopuler akan muncul otomatis begitu siswa berdiskusi dengan TAKO AI.
+        Ringkasan topik terpopuler akan muncul otomatis begitu siswa berdiskusi dengan NEKO AI.
       </p>
     </div>
   {:else}

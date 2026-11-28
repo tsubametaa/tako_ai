@@ -39,7 +39,7 @@
   <div class="flex flex-col gap-1.5">
     <div class="flex items-center justify-between">
       <h3 class="text-[11px] font-extrabold uppercase tracking-wider text-muted">
-        Gaya Penjelasan TAKO AI
+        Gaya Penjelasan NEKO AI
       </h3>
       <span class="hidden text-[10px] text-muted sm:inline">
         Pilih preferensi uraian konsep koding & AI

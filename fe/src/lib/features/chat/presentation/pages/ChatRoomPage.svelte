@@ -59,7 +59,7 @@
 </script>
 
 <svelte:head>
-  <title>{currentTitle} - TAKO AI</title>
+  <title>{currentTitle} - NEKO AI</title>
 </svelte:head>
 
 <div class="flex h-full min-h-0 flex-col overflow-hidden">

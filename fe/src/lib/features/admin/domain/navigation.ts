@@ -38,7 +38,7 @@ export const ADMIN_SECTIONS: AdminSection[] = [
     label: 'Log Chat Siswa',
     title: 'Log Percakapan Siswa & AI',
     description:
-      'Pantau seluruh riwayat tanya-jawab siswa dengan TAKO AI, periksa sumber RAG, dan hapus percakapan atau pesan tertentu.',
+      'Pantau seluruh riwayat tanya-jawab siswa dengan NEKO AI, periksa sumber RAG, dan hapus percakapan atau pesan tertentu.',
     backendEndpoint: 'GET / DELETE /api/v1/admin/chats',
   },
   {

@@ -21,7 +21,7 @@ export class AdminAnalyticsController {
       this.errorMessage =
         err instanceof Error
           ? err.message
-          : 'Gagal memuat analitik penggunaan TAKO AI.';
+          : 'Gagal memuat analitik penggunaan NEKO AI.';
     } finally {
       this.loading = false;
     }

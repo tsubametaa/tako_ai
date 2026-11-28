@@ -118,11 +118,12 @@
 
 <svelte:window onclick={handleWindowClick} />
 
-<div bind:this={containerEl} class="relative w-full {className}">
+<div bind:this={containerEl} data-slot="select" class="relative w-full {className}">
   <button
     bind:this={triggerEl}
     {id}
     type="button"
+    data-slot="select-trigger"
     role="combobox"
     aria-haspopup="listbox"
     aria-controls={listboxId}
@@ -158,6 +159,7 @@
   {#if open}
     <ul
       id={listboxId}
+      data-slot="select-content"
       role="listbox"
       aria-label={ariaLabel ?? placeholder}
       transition:fly={{ y: -6, duration: 150, easing: cubicOut }}

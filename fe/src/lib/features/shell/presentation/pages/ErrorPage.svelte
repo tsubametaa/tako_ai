@@ -17,7 +17,7 @@
 </script>
 
 <svelte:head>
-  <title>{status} - Tako KKA</title>
+  <title>{status} - Neko KKA</title>
 </svelte:head>
 
 <main class="flex min-h-dvh items-center justify-center bg-background px-4 py-12 text-ink">
@@ -40,7 +40,7 @@
         href={homeHref}
         class="neo-control inline-flex min-h-[44px] items-center bg-surface-soft px-4 py-2 text-sm font-bold text-ink hover:bg-surface"
       >
-        Ke Beranda Tako
+        Ke Beranda Neko
       </a>
     </div>
   </Card>

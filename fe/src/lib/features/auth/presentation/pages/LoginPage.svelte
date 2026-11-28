@@ -25,7 +25,7 @@
 </script>
 
 <svelte:head>
-  <title>Masuk - TAKO AI</title>
+  <title>Masuk - NEKO AI</title>
 </svelte:head>
 
 <main class="flex min-h-dvh w-full items-center justify-center bg-background px-4 py-8 text-ink">

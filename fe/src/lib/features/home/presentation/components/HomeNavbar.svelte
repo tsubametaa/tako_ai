@@ -1,6 +1,7 @@
 <script lang="ts">
   import { LogIn } from '@lucide/svelte';
   import type { ResolvedTheme } from '$lib/features/theme';
+  import { NekoMark } from '$lib/shared/ui';
   import HomeThemeSwitch from './HomeThemeSwitch.svelte';
 
   interface Props {
@@ -30,14 +31,9 @@
       href={homeHref}
       class="inline-flex min-h-[40px] items-center gap-2.5 text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
     >
-      <span
-        class="inline-flex h-9 w-9 items-center justify-center rounded-xl border-2 border-line bg-mustard text-sm font-extrabold text-on-mustard shadow-[2px_2px_0px_var(--neo-shadow-color)]"
-        aria-hidden="true"
-      >
-        T
-      </span>
+      <NekoMark size="md" />
       <span class="text-base font-extrabold tracking-tight md:text-lg">
-        TAKO <span class="text-primary">AI</span>
+        NEKO <span class="text-primary">AI</span>
       </span>
     </a>
 

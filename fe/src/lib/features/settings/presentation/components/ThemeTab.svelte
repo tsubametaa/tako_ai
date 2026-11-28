@@ -48,17 +48,17 @@
   <div class="flex flex-col gap-2 rounded-xl border-2 border-line bg-surface-soft p-4 shadow-[2px_2px_0px_var(--neo-shadow-color)]">
     <span class="text-xs font-bold text-ink">Komposisi Palet Warna Resmi</span>
     <div class="grid grid-cols-3 gap-2 mt-1">
-      <div class="flex flex-col items-center rounded-lg border-2 border-line bg-[#789D8E] p-2.5 text-white shadow-[1.5px_1.5px_0px_var(--neo-shadow-color)]">
-        <span class="text-xs font-extrabold">Hijau Sage</span>
-        <span class="text-[10px] font-mono">#789D8E</span>
+      <div class="flex flex-col items-center rounded-lg border-2 border-line bg-[#4338CA] p-2.5 text-white shadow-[1.5px_1.5px_0px_var(--neo-shadow-color)]">
+        <span class="text-xs font-extrabold">Indigo Neko</span>
+        <span class="text-[10px] font-mono">#4338CA</span>
       </div>
       <div class="flex flex-col items-center rounded-lg border-2 border-line bg-[#FFFFFF] p-2.5 text-black shadow-[1.5px_1.5px_0px_var(--neo-shadow-color)]">
         <span class="text-xs font-extrabold">Putih</span>
         <span class="text-[10px] font-mono">#FFFFFF</span>
       </div>
-      <div class="flex flex-col items-center rounded-lg border-2 border-line bg-[#E1AD01] p-2.5 text-black shadow-[1.5px_1.5px_0px_var(--neo-shadow-color)]">
-        <span class="text-xs font-extrabold">Mustard</span>
-        <span class="text-[10px] font-mono">#E1AD01</span>
+      <div class="flex flex-col items-center rounded-lg border-2 border-line bg-[#F59E0B] p-2.5 text-black shadow-[1.5px_1.5px_0px_var(--neo-shadow-color)]">
+        <span class="text-xs font-extrabold">Amber Neko</span>
+        <span class="text-[10px] font-mono">#F59E0B</span>
       </div>
     </div>
     <p class="mt-2 text-[11px] text-muted leading-relaxed">

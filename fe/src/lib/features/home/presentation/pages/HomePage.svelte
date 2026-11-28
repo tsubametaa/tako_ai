@@ -31,7 +31,7 @@
 <svelte:window bind:scrollY />
 
 <svelte:head>
-  <title>TAKO AI - Teman Belajar Koding dan AI Kelas X</title>
+  <title>NEKO AI - Teman Belajar Koding dan AI Kelas X</title>
 </svelte:head>
 
 <div class="flex min-h-dvh flex-col bg-background text-ink">

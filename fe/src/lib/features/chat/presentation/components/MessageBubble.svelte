@@ -8,12 +8,13 @@
     SourceChip,
     SourcePanel,
   } from '$lib/features/sources';
+  import { NekoMark } from '$lib/shared/ui';
   import type { GenerationStatus } from '../../domain/generation';
   import type { Message } from '../../domain/message';
   import { splitGuidingQuestion } from '../../domain/responseFormat';
   import AttachmentChip from './AttachmentChip.svelte';
   import MessageMarkdown from './MessageMarkdown.svelte';
-  import TakoThinkingStatus from './TakoThinkingStatus.svelte';
+  import NekoThinkingStatus from './NekoThinkingStatus.svelte';
 
   interface Props {
     message: Message;
@@ -77,14 +78,9 @@
       >
         <div class="flex items-center justify-between gap-2">
           <div class="flex flex-wrap items-center gap-2">
-            <span
-              class="inline-flex h-6 w-6 items-center justify-center rounded-md border border-line bg-mustard text-[11px] font-extrabold text-on-mustard"
-              aria-hidden="true"
-            >
-              T
-            </span>
+            <NekoMark size="xs" />
             <span class="text-[11px] font-extrabold tracking-wide text-muted uppercase">
-              TAKO AI
+              NEKO AI
             </span>
             {#if message.thinkingSeconds && (!message.isStreaming || message.content)}
               <span
@@ -118,7 +114,7 @@
         {#if parsedResponse.body}
           <MessageMarkdown content={parsedResponse.body} />
         {:else if message.isStreaming}
-          <TakoThinkingStatus
+          <NekoThinkingStatus
             {status}
             hasSources={Boolean(message.sources && message.sources.length > 0)}
           />

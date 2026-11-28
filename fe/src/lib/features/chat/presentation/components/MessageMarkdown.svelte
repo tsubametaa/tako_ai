@@ -31,8 +31,8 @@
 </script>
 
 <div
-  class="prose prose-sm prose-tako tako-markdown max-w-none {compact
-    ? 'tako-markdown--compact font-bold'
+  class="prose prose-sm prose-neko neko-markdown max-w-none {compact
+    ? 'neko-markdown--compact font-bold'
     : 'font-medium'}"
 >
   {@html html}

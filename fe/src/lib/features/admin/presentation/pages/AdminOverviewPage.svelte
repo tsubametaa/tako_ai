@@ -38,7 +38,7 @@
 </script>
 
 <svelte:head>
-  <title>Ringkasan Analitik AI - Admin TAKO</title>
+  <title>Ringkasan Analitik AI - Admin NEKO</title>
 </svelte:head>
 
 <div class="flex flex-col gap-5">
@@ -46,7 +46,7 @@
   <Card class="flex flex-wrap items-center justify-between gap-4 p-5">
     <div>
       <h2 class="text-lg font-extrabold text-ink md:text-xl">
-        Ringkasan Penggunaan TAKO AI
+        Ringkasan Penggunaan NEKO AI
       </h2>
       <p class="mt-0.5 text-xs font-medium text-muted">
         Pantau tren pertanyaan siswa, perbandingan keaktifan antar kelas, dan topik KKA paling banyak ditanyakan.

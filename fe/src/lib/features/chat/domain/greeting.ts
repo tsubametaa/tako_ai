@@ -75,7 +75,7 @@ export function getTimeGreeting(date: Date = new Date()): TimeGreeting {
       period: 'morning',
       salutation: 'Selamat pagi',
       subtitle:
-        'Awali hari dengan ide segar. Konsep KKA mana yang mau kita bedah bareng TAKO AI?',
+        'Awali hari dengan ide segar. Konsep KKA mana yang mau kita bedah bareng NEKO AI?',
     };
   }
 
@@ -101,6 +101,6 @@ export function getTimeGreeting(date: Date = new Date()): TimeGreeting {
     period: 'night',
     salutation: 'Selamat malam',
     subtitle:
-      'Belajar santai malam ini? Ceritakan pertanyaanmu, TAKO AI siap bantu pelan-pelan.',
+      'Belajar santai malam ini? Ceritakan pertanyaanmu, NEKO AI siap bantu pelan-pelan.',
   };
 }

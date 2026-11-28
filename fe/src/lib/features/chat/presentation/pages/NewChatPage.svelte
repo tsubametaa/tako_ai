@@ -57,7 +57,7 @@
 </script>
 
 <svelte:head>
-  <title>Percakapan Baru - TAKO AI</title>
+  <title>Percakapan Baru - NEKO AI</title>
 </svelte:head>
 
 <div class="flex h-full min-h-0 flex-col overflow-hidden">
